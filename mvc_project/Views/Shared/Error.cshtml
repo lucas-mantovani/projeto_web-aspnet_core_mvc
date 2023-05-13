@@ -1,0 +1,16 @@
+﻿
+@model mvc_project.Models.ViewModels.ErrorViewModel
+@{
+    ViewData["title"] = "Error";
+}
+
+<h1 class="text-danger">@ViewData["title"].</h1>
+<h2 class="text-danger">@Model.Message</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+

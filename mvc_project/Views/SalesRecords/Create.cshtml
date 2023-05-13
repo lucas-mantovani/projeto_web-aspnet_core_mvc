@@ -1,0 +1,46 @@
+﻿@model mvc_project.Models.ViewModels.SaleFormViewModel
+@using mvc_project.Models.Enums
+
+
+@{
+    ViewData["title"] = "Create Sale";
+}
+
+<h1>@ViewData["title"]</h1>
+
+<h4>Sale</h4>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label asp-for="salesRecord.Date" class="control-label"></label>
+                <input asp-for="salesRecord.Date" type="date" class="form-control" />
+                <span asp-validation-for="salesRecord.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salesRecord.Amount" class="control-label"></label>
+                <input asp-for="salesRecord.Amount" class="form-control" />
+                <span asp-validation-for="salesRecord.Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salesRecord.Seller" class="control-label">Seller</label>
+                <select asp-for="salesRecord.Seller.Id" asp-items="@(new SelectList(Model.sellers, "Id", "Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="salesRecord.Status" class="control-label">Sale status</label>
+                <select asp-for="salesRecord.Status" asp-items="Html.GetEnumSelectList<SaleStatus>()" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-action="Index" class="btn btn-default">Back to list</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
